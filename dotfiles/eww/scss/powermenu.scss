@@ -1,0 +1,21 @@
+.powermenu-box {
+  background-color: #022125;
+  padding: 15px;
+  color: #ffffff;
+  font-size: 16px;
+  @include floating_widget();
+}
+
+  
+  button {
+    background-color: #00e1ff;
+    color: black;
+    padding: 10px;
+    border-radius: 13px;
+    font-weight: bold;
+    border: none;
+  }
+  
+  button:hover {
+    background-color: #026572;
+  }

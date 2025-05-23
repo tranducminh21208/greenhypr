@@ -1,0 +1,75 @@
+
+;; Definimos windows y calendario
+
+(defpoll    hour        :interval "5s" `date "+%H"`)
+(defpoll    minutes     :interval "5s" `date "+%M"`)
+
+(defwindow calendar
+    :monitor 0
+    :stacking "fg"
+    :geometry (geometry 
+    :x "1285px"           ; 1920 (ancho total) - 300 (ancho del calendario) = 1620
+    :y "0px"              ; Pegado al borde superior
+    :width "300px" 
+    :height "400px"
+    )
+    (eventbox
+        (datemenu :valign "start" :halign "start")))
+
+(defwidget datemenu [valign halign] (box
+    :valign valign
+    :halign halign
+    :orientation "v"
+    :class "datemenu"
+    :space-evenly false
+    (box
+        :halign "center"
+        :space-evenly false
+        :class "clock"
+        (label :text hour)
+        (label :text ":")
+        (label :text minutes))
+    (box
+        :class "calendar-bin widget"
+        (calendar))))        
+
+(defwindow calendar-closer
+  :monitor 0
+  :geometry (geometry :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (eventbox :onclick "eww close calendar && eww close calendar-closer"))
+
+;; Definimos powermenu
+
+(defwindow powermenu-window
+    :monitor 0
+    :transparent true
+    :geometry (geometry 
+    :x "10px"           
+    :y "10px"              
+    :width "150px" 
+    :height "100px"
+    )
+    :stacking "fg"
+    :exclusive false
+    :focusable false
+    :class "powermenu"
+    (powermenu))
+
+(defwidget powermenu []
+  (box
+    :orientation "vertical"
+    :class "powermenu-box"
+    :spacing 10
+    (button :onclick "systemctl poweroff" "Apagar")
+    (button :onclick "systemctl reboot" "Reiniciar")
+  )
+)
+
+(defwindow powermenu-closer
+  :monitor 0
+  :geometry (geometry :width "100%" :height "100%")
+  :stacking "fg"
+  :focusable false
+  (eventbox :onclick "eww close powermenu-window && eww close powermenu-closer"))

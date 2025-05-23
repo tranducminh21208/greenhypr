@@ -1,0 +1,26 @@
+.datemenu{
+    @include floating_widget;
+    
+    margin-left: 0;
+    background-color: #022125;
+
+    .widget{
+        @include widget;
+        margin-left: $spacing;
+        padding: $spacing;
+        
+    }
+
+    .clock *{
+        margin-top: $spacing;
+        text-shadow: $text_shadow;
+        font-size: 6em;
+    }
+    
+    .calendar-bin{
+        padding: 1em 2.5em .4em 2em;
+        margin-bottom: 1em;
+        margin-right: .5em;
+        @include calendar;
+    }
+}
