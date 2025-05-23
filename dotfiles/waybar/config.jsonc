@@ -1,0 +1,131 @@
+{
+  "position": "top",
+  "layer": "top",
+  "output": "DP-1",
+  "height": 16,
+  "margin-top": 0,
+  "margin-bottom": 0,
+  "margin-left": 0,
+  "margin-right": 0,
+  "modules-left": ["custom/launcher", "custom/tray", "custom/sep", "custom/tray", "custom/pi", "custom/tray", "custom/web", "custom/tray", "custom/backup"],
+  "modules-center": ["hyprland/workspaces", "custom/notification"],
+  "modules-right": ["custom/clock", "custom/memoria", "pulseaudio", "custom/wl-gammarelay-temperature", "custom/wl-gammarelay-brightness"],
+
+  "custom/clock": {
+    "exec": "~/.config/waybar/scripts/clock.sh",
+    "format": "{}",
+    "interval": 1,
+    "return-type": "text",
+    "tooltip": false,
+    "on-click": "eww open calendar-closer && eww open calendar"
+  },
+
+  "custom/memoria": {
+    "exec": "~/.config/waybar/scripts/memoria.sh",
+    "format": "{}",
+    "interval": 1,
+    "return-type": "text",
+    "tooltip": false
+  },
+
+  "hyprland/workspaces": {
+    "active-only": false,
+    "all-outputs": false,
+    "disable-scroll": false,
+    "on-scroll-up": "hyprctl dispatch workspace e-1",
+    "on-scroll-down": "hyprctl dispatch workspace e+1",
+    "format": "{icon}",
+    "tooltip": false,
+    "format-icons": {
+      "urgent": "",
+      "active": "",
+      "default": "",
+      "sort-by-number": true
+      }
+    },
+
+  "custom/tray": {
+    "format": "<span> </span>",
+    "tooltip": false
+  },
+
+  "custom/sep": {
+    "format": "<span>⋮</span>",
+    "tooltip": false
+  },
+
+  "pulseaudio": {
+    "format": "<span font='12' rise='800'>{icon}</span><span font='10' rise='2200'> {volume}%</span>",
+    "format-muted": "<span font='12' rise='800'>󰝟 </span><span font='10' rise='2200'>Mute</span>",
+    "format-icons": {
+      "default": ["󰕿", "󰖀", "󰕾"]
+    },
+    "on-click": "bash ~/.config/waybar/scripts/volume mute",
+    "on-scroll-up": "bash ~/.config/waybar/scripts/volume up",
+    "on-scroll-down": "bash ~/.config/waybar/scripts/volume down",
+    "scroll-step": 5,
+    "on-click-right": "pavucontrol",
+    "tooltip": false
+  },
+
+  "custom/launcher": {
+    "format": "<span rise='-1000'>󰣇 </span>",
+    "on-click": "eww open powermenu-closer && eww open powermenu-window",
+    "tooltip": false
+  },
+
+  "custom/pi": {
+    "format": "<span>🍓</span>",
+    "on-click": "kitty --title kitten -e kitten ssh USER@IP -p PORT",
+    "tooltip": false
+  },
+  
+  "custom/web": {
+    "format": "<span>🖥️</span>",
+    "on-click": "kitty --title kitten -e kitten ssh USER@IP -p PORT",
+    "tooltip": false
+  },
+
+  "custom/backup": {
+    "format": "<span>📀</span>",
+    "on-click": "kitty --title kitten -e kitten ssh USER@IP -p PORT",
+    "tooltip": false
+  },
+
+  "custom/wl-gammarelay-temperature": {
+    "format": "🌙 {}",
+    "exec": "wl-gammarelay --subscribe Temperature",
+    "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n +100",
+    "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateTemperature n -100",
+    "tooltip": false
+  },
+  
+  "custom/wl-gammarelay-brightness": {
+    "format": "💡 {}",
+    "exec": "wl-gammarelay --subscribe Brightness",
+    "on-scroll-up": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d +0.02",
+    "on-scroll-down": "busctl --user -- call rs.wl-gammarelay / rs.wl.gammarelay UpdateBrightness d -0.02",
+    "tooltip": false
+  },
+
+  "custom/notification": {
+    "tooltip": false,
+    "format": "{icon}",
+    "format-icons": {
+      "notification": "󱅫",
+      "none": "󰂚",
+      "dnd-notification": "󱏧",
+      "dnd-none": "󱏧",
+      "inhibited-notification": "󱅫",
+      "inhibited-none": "󰂚",
+      "dnd-inhibited-notification": "󱏧",
+      "dnd-inhibited-none": "󱏧"
+    },
+    "return-type": "json",
+    "exec-if": "which swaync-client",
+    "exec": "swaync-client -swb",
+    "on-click": "swaync-client -t -sw",
+    "on-click-right": "swaync-client -d -sw",
+    "escape": true
+  }
+}
