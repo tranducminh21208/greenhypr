@@ -46,8 +46,8 @@
     :monitor 0
     :transparent true
     :geometry (geometry 
-    :x "10px"           
-    :y "10px"              
+    :x "0px"           
+    :y "0px"              
     :width "150px" 
     :height "100px"
     )
