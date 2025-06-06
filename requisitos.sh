@@ -15,7 +15,7 @@ rm -rf yay-git
 
 # Instalar paquetes desde AUR
 yay -S --noconfirm \
-  hyprland \
+  hyprland-git \
   kitty \
   wl-clip-persist \
   sddm-theme-sugar-candy-git \
